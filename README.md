@@ -30,3 +30,17 @@ hippocampus-3d-attention-unet/
 ├── training/             # Training and evaluation scripts
 ├── inference/            # Inference on full MRI volumes
 └── README.md
+
+## Data and Preprocessing
+This repository does **not** contain raw or preprocessed MRI data.
+All experiments were conducted using the **Medical Segmentation Decathlon – Task04 (Hippocampus)** dataset.
+Preprocessing is fully reproducible using the script:
+
+`preprocessing/preprocessed.py`
+
+The preprocessing pipeline includes:
+1. Resampling to isotropic voxel spacing  
+2. Intensity normalization (z-score, non-zero voxels)  
+3. Center cropping / padding to fixed shape  
+4. Binary mask post-processing
+
