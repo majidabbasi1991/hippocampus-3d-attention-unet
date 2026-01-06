@@ -32,15 +32,44 @@ hippocampus-3d-attention-unet/
 └── README.md
 
 ## Data and Preprocessing
+
 This repository does **not** contain raw or preprocessed MRI data.
+
 All experiments were conducted using the **Medical Segmentation Decathlon – Task04 (Hippocampus)** dataset.
+
 Preprocessing is fully reproducible using the script:
 
 `preprocessing/preprocessed.py`
 
 The preprocessing pipeline includes:
+
 1. Resampling to isotropic voxel spacing  
 2. Intensity normalization (z-score, non-zero voxels)  
-3. Center cropping / padding to fixed shape  
-4. Binary mask post-processing
+3. Center cropping / padding to a fixed shape  
+4. Binary mask post-processing  
+
+---
+
+## Dataset and Patch Sampling
+
+Preprocessed volumes are loaded using a custom PyTorch `Dataset` implementation.
+
+Patch-based sampling is used during training to address class imbalance and GPU memory constraints. A foreground-biased sampling strategy increases the probability of extracting patches containing hippocampus voxels.
+
+Dataset splitting (train / validation / test) is performed automatically and stored as a JSON file for reproducibility.
+
+See:  
+`dataset/dataset_patches.py`
+
+---
+
+## Model Architecture
+
+The proposed model is a 3D U-Net enhanced with:
+
+- Dilated convolutions for increased receptive field  
+- Attention Gates to suppress irrelevant background regions  
+
+The architecture is implemented in PyTorch and trained end-to-end for binary hippocampus segmentation.
+
 
