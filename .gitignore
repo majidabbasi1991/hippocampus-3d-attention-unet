@@ -1,0 +1,11 @@
+# MRI data files
+*.nii
+*.nii.gz
+
+# Raw and preprocessed data directories
+data/
+data_preprocessed/
+
+# Python cache files
+__pycache__/
+*.pyc
